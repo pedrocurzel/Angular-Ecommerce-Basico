@@ -1,0 +1,61 @@
+<ion-header [translucent]="true" id="main-content">
+  <ion-toolbar style="padding-right: 10px; padding-left: 10px;">
+    <ion-title>
+      Home
+    </ion-title>
+    <div slot="end">
+      <ion-menu-toggle>
+        <ion-button>
+          <ion-icon name="cart" style="color: white;"></ion-icon>
+          <ion-label>
+            {{cartService.cart.value.length}}
+          </ion-label>
+        </ion-button>
+      </ion-menu-toggle>
+    </div>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" >
+  <div style="display: flex; flex-direction: row; justify-content: start; align-items: center; flex-wrap: wrap; max-width: 100%;">
+    @for (product of products; track $index) {
+      <ion-card button="true" class="product-card" style="height: 200px; width: 200px; display: flex; align-items: center; justify-content: center;" (click)="addProduct(product)" >
+        <p>{{product.name}}</p>
+      </ion-card>
+    }
+  </div>
+</ion-content>
+
+
+<ion-menu contentId="main-content" side="end">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Cart - R$ {{cartService.totalValue()}}</ion-title>
+      <ion-button slot="end" [disabled]="cartService.totalValue() <= 0" (click)="selectAddress()" >
+        <ion-icon name="checkmark"></ion-icon>
+      </ion-button>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <div style="display: flex; flex-direction: row; justify-content: start; align-items: center; flex-wrap: wrap; max-width: 100%;">
+      @for (product of cartService.cart.value; track $index) {
+        <ion-card style="display: flex; align-items: center; justify-content: center; width: 40%; flex-direction: row;">
+          <p>{{product.name}}</p>
+        </ion-card>
+        <div style="display: flex; flex-direction: row; flex-grow: 1; justify-content: center; align-items: center;">
+          {{product.quantity}} - R$ {{getTotalProductValue(product)}}
+        </div>
+        <div style="display: flex; flex-direction: row; flex-grow: 1;">
+          <ion-button style="flex-grow: 1;" (click)="cartService.changeItemQuantity(product, 'decrease')" >
+            -
+          </ion-button>
+          <ion-button style="flex-grow: 1;" (click)="cartService.changeItemQuantity(product, 'add')">
+            +
+          </ion-button>
+        </div>
+        
+      }
+    </div>
+  </ion-content>
+</ion-menu>

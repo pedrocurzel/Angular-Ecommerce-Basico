@@ -1,0 +1,32 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button slot="start"></ion-back-button>
+    <ion-title>Select your address</ion-title>
+    <ion-button slot="end" [disabled]="!cartService.selectedAddress.value" (click)="finishOrder()" >
+      <ion-icon name="arrow-forward"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" *ngIf="ready">
+  <div style="display: flex; width: 100%; flex-direction: row; flex-wrap: wrap;">
+    @for (address of addresses; track $index) {
+      <ion-card [id]="address.id" [ngClass]="{'selected': address.id == cartService.selectedAddress.value && cartService.selectedAddress.value!.id}" button="true" (click)="selectAddress(address)" style="width: 70%; min-height: 150px; background-color: #262626; border-radius: 5px; margin: 5px; display: flex; flex-direction: column; justify-content: space-between; flex-wrap: wrap;" class="ion-padding">
+        <p>{{address.street}}</p>
+        
+        <p>{{address.country}}</p>
+        
+        <p>{{address.city}}</p>
+        
+        <p>{{address.code}}</p>
+        
+        @if (cartService.selectedAddress.value && cartService.selectedAddress.value!.id == address.id) {
+          <div style="position: fixed; right: 15px; top: 15px;">
+            <ion-icon name="checkmark" style="color: #28bb50; font-size: 26px;"></ion-icon>
+          </div>
+        }
+
+      </ion-card>
+    }
+  </div>
+</ion-content>

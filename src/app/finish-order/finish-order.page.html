@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button slot="start"></ion-back-button>
+    <ion-title>finish-order</ion-title>
+    <ion-button slot="end" (click)="finishOrder()">
+      Finish
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="ion-padding">
+    <h1>R$ {{cartService.totalValue()}}</h1>
+    <div style="display: flex; width: 100%; flex-direction: row; flex-wrap: wrap;">
+      @for (product of cartService.cart.value!; track $index) {
+        <ion-card button="true" style="width: 70%; min-height: 150px; background-color: #262626; border-radius: 5px; margin: 5px; display: flex; flex-direction: column; justify-content: space-between; flex-wrap: wrap;" class="ion-padding">
+          <p>{{product.name}}</p>
+          
+          <p>{{product.quantity}}</p>
+          
+          <p>{{product.price}}</p>
+          
+        </ion-card>
+      }
+    </div>
+
+    <div style="display: flex; width: 100%; flex-direction: row; flex-wrap: wrap;">
+      <ion-card button="true" style="width: 70%; min-height: 150px; background-color: #262626; border-radius: 5px; margin: 5px; display: flex; flex-direction: column; justify-content: space-between; flex-wrap: wrap;" class="ion-padding">
+        <h1>Address</h1>
+        <p>{{cartService.selectedAddress.value!.street}}</p>
+        
+        <p>{{cartService.selectedAddress.value!.country}}</p>
+        
+        <p>{{cartService.selectedAddress.value!.city}}</p>
+        
+        <p>{{cartService.selectedAddress.value!.code}}</p>
+      
+      </ion-card>
+    </div>
+
+    
+  </div>
+</ion-content>

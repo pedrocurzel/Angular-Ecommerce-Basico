@@ -1,0 +1,7 @@
+{
+  "name": "ecomerce-start",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

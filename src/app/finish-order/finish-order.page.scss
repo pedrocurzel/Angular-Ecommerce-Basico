@@ -1,0 +1,21 @@
+p {
+    margin: 0px;
+    padding: 10px 0px 10px 0px;
+    word-break: break-all;
+    white-space: normal;
+}
+
+ion-card {
+
+    &:hover {
+        cursor: pointer;
+        border: 1px solid white;
+    }
+
+
+    
+}
+
+.selected {
+    border: 1px solid #28bb50;
+}
